@@ -1,0 +1,28 @@
+/**
+ * Created by Administrator on 2017/4/10 0010.
+ */
+var gulp=require("gulp"),
+    uglify=require("gulp-uglify"),
+    minifyCSS = require('gulp-minify-css'),
+    concat=require("gulp-concat");
+
+   gulp.task("minifyjs",function () {
+       gulp.src("js/*.js")
+           .pipe(uglify())
+           .pipe(gulp.dest('dist/js'))
+           .pipe(concat('order_query.js'))
+           .pipe(gulp.dest('dist/js'))
+   })
+    gulp.task('css', function () {
+        gulp.src('css/*.css')
+            .pipe(minifyCSS())
+            .pipe(gulp.dest('dist/css'))
+    })
+    gulp.task('default', ['minifyjs','css'])
+    gulp.watch('js/*.js', ['minifyjs']);
+    gulp.watch('cs/*.css', ['css']);
+
+    gulp.task('auto', function () {
+        gulp.watch('js/*.js', ['minifyjs'])
+        gulp.watch('cs/*.css', ['css'])
+    })

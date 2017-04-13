@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		window.onload=function(){
+//			var a=document.getElementsByTagName("div");
+//			for(var i=0;i<3;i++){				
+//				a[i].onclick=function(){
+//					alert(i)
+//				}
+//				
+//			}
+//最内层的return出去的fun函数不是第二层fun函数，是最外层的fun函数。
+//所以，三个fun函数的关系也理清楚了，第一个等于第三个，他们都不等于第二个。
+			function fun(n,o) {//han1
+			  console.log(o);
+			  return {
+			    fun:function(m){//han2 新创建匿名函数表达式 所有声明的匿名函数都是一个新函数。
+			      return fun(m,n);//han1  
+			    }
+			  };
+			}
+			//具名函数表达式的函数名只能在创建函数内部使用
+			var a = fun(0);  a.fun(1);  a.fun(2);  a.fun(3);//undefined,?,?,?
+			//var b = fun(0).fun(1).fun(2).fun(3);//undefined,?,?,?
+			//var c = fun(0).fun(1);  c.fun(2);  c.fun(3);//undefined,?,?,?
+		}
+		
+		</script>
+	</head>
+	<body>
+		<div>11</div>
+		<div>22</div>
+		<div>33</div>
+	</body>
+</html>
